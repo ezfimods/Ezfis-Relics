@@ -1,0 +1,83 @@
+# Hook.cs Methods
+
+| Method | Parameters |
+|---|---|
+| **AfterActEntered** | IRunState runState |
+| **BeforeAttack** | CombatState combatState, AttackCommand command |
+| **AfterAttack** | CombatState combatState, AttackCommand command |
+| **AfterBlockBroken** | CombatState combatState, Creature creature |
+| **AfterBlockCleared** | CombatState combatState, Creature creature |
+| **BeforeBlockGained** | CombatState combatState, Creature creature, decimal amount, ValueProp props, CardModel? cardSource |
+| **AfterBlockGained** | CombatState combatState, Creature creature, decimal amount, ValueProp props, CardModel? cardSource |
+| **BeforeCardAutoPlayed** | CombatState combatState, CardModel card, Creature? target, AutoPlayType type |
+| **AfterCardChangedPiles** | IRunState runState, CombatState? combatState, CardModel card, PileType oldPile, AbstractModel? source |
+| **AfterCardDiscarded** | CombatState combatState, PlayerChoiceContext choiceContext, CardModel card |
+| **AfterCardDrawn** | CombatState combatState, PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw |
+| **AfterCardEnteredCombat** | CombatState combatState, CardModel card |
+| **AfterCardExhausted** | CombatState combatState, PlayerChoiceContext choiceContext, CardModel card, bool causedByEthereal |
+| **AfterCardGeneratedForCombat** | CombatState combatState, CardModel card, bool addedByPlayer |
+| **BeforeCardPlayed** | CombatState combatState, CardPlay cardPlay |
+| **AfterCardPlayed** | CombatState combatState, PlayerChoiceContext choiceContext, CardPlay cardPlay |
+| **BeforeCardRemoved** | IRunState runState, CardModel card |
+| **AfterCardRetained** | CombatState combatState, CardModel card |
+| **BeforeCombatStart** | IRunState runState, CombatState? combatState |
+| **AfterCombatEnd** | IRunState runState, CombatState? combatState, CombatRoom room |
+| **AfterCombatVictory** | IRunState runState, CombatState? combatState, CombatRoom room |
+| **AfterCreatureAddedToCombat** | CombatState combatState, Creature creature |
+| **AfterCurrentHpChanged** | IRunState runState, CombatState? combatState, Creature creature, decimal delta |
+| **AfterDamageGiven** | PlayerChoiceContext choiceContext, CombatState combatState, Creature? dealer, DamageResult results, ValueProp props, Creature target, CardModel? cardSource |
+| **BeforeDamageReceived** | PlayerChoiceContext choiceContext, IRunState runState, CombatState? combatState, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource |
+| **AfterDamageReceived** | PlayerChoiceContext choiceContext, IRunState runState, CombatState? combatState, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource |
+| **BeforeDeath** | IRunState runState, CombatState? combatState, Creature creature |
+| **AfterDeath** | IRunState runState, CombatState? combatState, Creature creature, bool wasRemovalPrevented, float deathAnimLength |
+| **AfterGoldGained** | IRunState runState, Player player |
+| **AfterDiedToDoom** | CombatState combatState, IReadOnlyList<Creature> creatures |
+| **AfterEnergyReset** | CombatState combatState, Player player |
+| **AfterEnergySpent** | CombatState combatState, CardModel card, int amount |
+| **BeforeFlush** | CombatState combatState, Player player |
+| **AfterForge** | CombatState combatState, decimal amount, Player forger, AbstractModel? source |
+| **BeforeHandDraw** | CombatState combatState, Player player, PlayerChoiceContext playerChoiceContext |
+| **AfterHandEmptied** | CombatState combatState, PlayerChoiceContext choiceContext, Player player |
+| **AfterItemPurchased** | IRunState runState, Player player, MerchantEntry itemPurchased, int goldSpent |
+| **AfterMapGenerated** | IRunState runState, ActMap map, int actIndex |
+| **AfterModifyingBlockAmount** | CombatState combatState, decimal modifiedBlock, CardModel? cardSource, CardPlay? cardPlay, IEnumerable<AbstractModel> modifiers |
+| **AfterModifyingCardPlayCount** | CombatState combatState, CardModel card, IEnumerable<AbstractModel> modifiers |
+| **AfterModifyingCardRewardOptions** | IRunState runState, IEnumerable<AbstractModel> modifiers |
+| **AfterModifyingDamageAmount** | IRunState runState, CombatState? combatState, CardModel? cardSource, IEnumerable<AbstractModel> modifiers |
+| **AfterModifyingEnergyGain** | CombatState combatState, IEnumerable<AbstractModel> modifiers |
+| **AfterModifyingHandDraw** | CombatState combatState, IEnumerable<AbstractModel> modifiers |
+| **AfterModifyingHpLostBeforeOsty** | IRunState runState, CombatState? combatState, IEnumerable<AbstractModel> modifiers |
+| **AfterModifyingHpLostAfterOsty** | IRunState runState, CombatState? combatState, IEnumerable<AbstractModel> modifiers |
+| **AfterModifyingOrbPassiveTriggerCount** | CombatState combatState, OrbModel orb, IEnumerable<AbstractModel> modifiers |
+| **AfterModifyingPowerAmountGiven** | CombatState combatState, IEnumerable<AbstractModel> modifiers, PowerModel modifiedPower |
+| **AfterModifyingPowerAmountReceived** | CombatState combatState, IEnumerable<AbstractModel> modifiers, PowerModel modifiedPower |
+| **AfterModifyingRewards** | IRunState runState, IEnumerable<AbstractModel> modifiers |
+| **AfterOrbChanneled** | CombatState combatState, PlayerChoiceContext choiceContext, Player player, OrbModel orb |
+| **AfterOrbEvoked** | PlayerChoiceContext choiceContext, CombatState combatState, OrbModel orb, IEnumerable<Creature> targets |
+| **AfterOstyRevived** | CombatState combatState, Creature osty |
+| **AfterPlayerTurnStart** | CombatState combatState, PlayerChoiceContext choiceContext, Player player |
+| **BeforePlayPhaseStart** | HookPlayerChoiceContext playerChoiceContext, Task setupPlayerTurnTask, CombatState combatState, Player player |
+| **AfterPotionDiscarded** | IRunState runState, CombatState? combatState, PotionModel potion |
+| **AfterPotionProcured** | IRunState runState, CombatState? combatState, PotionModel potion |
+| **BeforePotionUsed** | IRunState runState, CombatState? combatState, PotionModel potion, Creature? target |
+| **AfterPotionUsed** | IRunState runState, CombatState? combatState, PotionModel potion, Creature? target |
+| **BeforePowerAmountChanged** | CombatState combatState, PowerModel power, decimal amount, Creature target, Creature? applier, CardModel? cardSource |
+| **AfterPowerAmountChanged** | CombatState combatState, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource |
+| **AfterPreventingBlockClear** | CombatState combatState, AbstractModel preventer, Creature creature |
+| **AfterPreventingDeath** | IRunState runState, CombatState? combatState, AbstractModel preventer, Creature creature |
+| **AfterPreventingDraw** | CombatState combatState, AbstractModel modifier |
+| **AfterRestSiteHeal** | IRunState runState, Player player, bool isMimicked |
+| **AfterRestSiteSmith** | IRunState runState, Player player |
+| **BeforeRewardsOffered** | IRunState runState, Player player, IReadOnlyList<Reward> rewards |
+| **AfterRewardTaken** | IRunState runState, Player player, Reward reward |
+| **BeforeRoomEntered** | IRunState runState, AbstractRoom room |
+| **AfterRoomEntered** | IRunState runState, AbstractRoom room |
+| **AfterShuffle** | CombatState combatState, PlayerChoiceContext choiceContext, Player shuffler |
+| **BeforeSideTurnStart** | CombatState combatState, CombatSide side |
+| **AfterSideTurnStart** | CombatState combatState, CombatSide side |
+| **AfterStarsGained** | CombatState combatState, int amount, Player gainer |
+| **AfterStarsSpent** | CombatState combatState, int amount, Player spender |
+| **AfterSummon** | CombatState combatState, PlayerChoiceContext choiceContext, Player summoner, decimal amount |
+| **AfterTakingExtraTurn** | CombatState combatState, Player player |
+| **BeforeTurnEnd** | CombatState combatState, CombatSide side |
+| **AfterTurnEnd** | CombatState combatState, CombatSide side |

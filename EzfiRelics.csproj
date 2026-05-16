@@ -1,0 +1,163 @@
+<Project Sdk="Godot.NET.Sdk/4.5.1" InitialTargets="CheckDependencyPaths">
+    <Import Project=".\Sts2PathDiscovery.props" />
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>true</ImplicitUsings>
+        <Nullable>enable</Nullable> <!--Makes code analysis regarding null values stricter.-->
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
+        <PathMap>$(AppOutputBase)=.\</PathMap>
+        <GodotDisabledSourceGenerators>GodotPluginsInitializer</GodotDisabledSourceGenerators>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <DOTNET_HOST_PATH Condition="'$(DOTNET_HOST_PATH)' == ''">dotnet</DOTNET_HOST_PATH>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <!-- Diasble architecture mismatch warning; mods are ideally built for all platforms (MSIL)
+             while your local StS2 version will be for your specific platform. -->
+        <NoWarn>$(NoWarn);MSB3270</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(Sts2DataDir)')">
+        <Reference Include="0Harmony">
+            <HintPath>$(Sts2DataDir)/0Harmony.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup Condition="Exists('$(Sts2DataDir)')">
+        <Reference Include="sts2">
+            <HintPath>$(Sts2DataDir)/sts2.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup Condition="False"> <!--Allows access to originally private/protected members but may (unlikely to) cause errors.-->
+        <Publicize Include="sts2" IncludeVirtualMembers="false" IncludeCompilerGeneratedMembers="false" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="*" PrivateAssets="All" />
+        <PackageReference Include="Krafs.Publicizer" Version="*" PrivateAssets="All" />
+        <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="*" />
+        <!-- Generates a .pck file when building if only using simple assets. May not work on all setups. Uncomment to test. -->
+        <PackageReference Include="BSchneppe.StS2.PckPacker" Version="*" PrivateAssets="All" />
+        <AdditionalFiles Include="EzfiRelics/localization/**/*.json" /> <!-- Used by analyzer -->
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="EzfiRelics/**" />
+        <Compile Remove="materials/**" />
+        <Compile Remove="shaders/**" />
+        <Compile Remove="images/**" />
+        <EmbeddedResource Remove="EzfiRelics/**" />
+        <EmbeddedResource Remove="materials/**" />
+        <EmbeddedResource Remove="shaders/**" />
+        <EmbeddedResource Remove="images/**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Condition="Exists('Directory.Build.props')" Include="Directory.Build.props" />
+        <None Include=".gitignore" />
+        <None Include="EzfiRelics.json" />
+        <None Include="EzfiRelics\images\card_portraits\big\card.png" />
+        <None Include="EzfiRelics\images\card_portraits\card.png" />
+        <None Include="EzfiRelics\images\enchantments\bonded.png" />
+        <None Include="EzfiRelics\images\enchantments\six_sided.png" />
+        <None Include="EzfiRelics\images\powers\big\power.png" />
+        <None Include="EzfiRelics\images\powers\power.png" />
+        <None Include="EzfiRelics\images\relics\big\bloody_blade.png" />
+        <None Include="EzfiRelics\images\relics\big\fax_machine.png" />
+        <None Include="EzfiRelics\images\relics\big\grandfather_clock.png" />
+        <None Include="EzfiRelics\images\relics\big\gun.png" />
+        <None Include="EzfiRelics\images\relics\big\heavy_shield.png" />
+        <None Include="EzfiRelics\images\relics\big\hole_in_one_club.png" />
+        <None Include="EzfiRelics\images\relics\big\leaking_battery.png" />
+        <None Include="EzfiRelics\images\relics\big\long_tooth.png" />
+        <None Include="EzfiRelics\images\relics\big\lovely_locket.png" />
+        <None Include="EzfiRelics\images\relics\big\overflowing_cup.png" />
+        <None Include="EzfiRelics\images\relics\big\protein_powder.png" />
+        <None Include="EzfiRelics\images\relics\big\scalpel.png" />
+        <None Include="EzfiRelics\images\relics\big\snecko_dice.png" />
+        <None Include="EzfiRelics\images\relics\big\vampire_dentures.png" />
+        <None Include="EzfiRelics\images\relics\bloody_blade.png" />
+        <None Include="EzfiRelics\images\relics\bloody_blade_outline.png" />
+        <None Include="EzfiRelics\images\relics\fax_machine.png" />
+        <None Include="EzfiRelics\images\relics\fax_machine_outline.png" />
+        <None Include="EzfiRelics\images\relics\grandfather_clock.png" />
+        <None Include="EzfiRelics\images\relics\grandfather_clock_outline.png" />
+        <None Include="EzfiRelics\images\relics\gun.png" />
+        <None Include="EzfiRelics\images\relics\gun_outline.png" />
+        <None Include="EzfiRelics\images\relics\heavy_shield.png" />
+        <None Include="EzfiRelics\images\relics\heavy_shield_outline.png" />
+        <None Include="EzfiRelics\images\relics\hole_in_one_club.png" />
+        <None Include="EzfiRelics\images\relics\hole_in_one_club_outline.png" />
+        <None Include="EzfiRelics\images\relics\leaking_battery.png" />
+        <None Include="EzfiRelics\images\relics\leaking_battery_outline.png" />
+        <None Include="EzfiRelics\images\relics\long_tooth.png" />
+        <None Include="EzfiRelics\images\relics\long_tooth_outline.png" />
+        <None Include="EzfiRelics\images\relics\lovely_locket.png" />
+        <None Include="EzfiRelics\images\relics\lovely_locket_outline.png" />
+        <None Include="EzfiRelics\images\relics\overflowing_cup.png" />
+        <None Include="EzfiRelics\images\relics\overflowing_cup_outline.png" />
+        <None Include="EzfiRelics\images\relics\protein_powder.png" />
+        <None Include="EzfiRelics\images\relics\protein_powder_outline.png" />
+        <None Include="EzfiRelics\images\relics\scalpel.png" />
+        <None Include="EzfiRelics\images\relics\scalpel_outline.png" />
+        <None Include="EzfiRelics\images\relics\snecko_dice.png" />
+        <None Include="EzfiRelics\images\relics\snecko_dice_outline.png" />
+        <None Include="EzfiRelics\images\relics\vampire_dentures.png" />
+        <None Include="EzfiRelics\images\relics\vampire_dentures_outline.png" />
+        <None Include="EzfiRelics\localization\eng\ancients.json" />
+        <None Include="EzfiRelics\localization\eng\cards.json" />
+        <None Include="EzfiRelics\localization\eng\card_keywords.json" />
+        <None Include="EzfiRelics\localization\eng\enchantments.json" />
+        <None Include="EzfiRelics\localization\eng\powers.json" />
+        <None Include="EzfiRelics\localization\eng\relics.json" />
+        <None Include="EzfiRelics\localization\eng\static_hover_tips.json" />
+        <None Include="EzfiRelics\mod_image.png" />
+        <None Include="project.godot" />
+        <None Include="EzfiRelics/**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Remove="EzfiRelics\localization\eng\settings_ui.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="EzfiRelics\localization\eng\ancients.json" />
+      <AdditionalFiles Include="EzfiRelics\localization\eng\cards.json" />
+      <AdditionalFiles Include="EzfiRelics\localization\eng\card_keywords.json" />
+      <AdditionalFiles Include="EzfiRelics\localization\eng\enchantments.json" />
+      <AdditionalFiles Include="EzfiRelics\localization\eng\powers.json" />
+      <AdditionalFiles Include="EzfiRelics\localization\eng\relics.json" />
+      <AdditionalFiles Include="EzfiRelics\localization\eng\static_hover_tips.json" />
+    </ItemGroup>
+    
+    <Target Name="CheckDependencyPaths">
+        <Error Text=" Slay the Spire 2 data not found at path '$(Sts2DataDir)'" Condition="'$(Sts2DataDir)' == '' or !Exists('$(Sts2DataDir)')" />
+    </Target>
+    
+    <Target Name="CopyToModsFolderOnBuild" AfterTargets="PostBuildEvent">
+        <Message Text="Copying .dll .pdb and .json to mods folder." Importance="high" />
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/" />
+        <Copy SourceFiles="$(AssemblyName).json" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/" />
+        <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/" />
+    </Target>
+
+    <Target Name="CopyQuickPck" AfterTargets="PackPck" Condition="Exists('$(PckPackerOutputPath)') And '$(PckPackerSkipped)' != 'true'">
+        <Message Text="Copying quick .pck to mods folder." Importance="high" />
+        <Copy SourceFiles="$(PckPackerOutputPath)" DestinationFolder="$(ModsPath)/$(MSBuildProjectName)" />
+    </Target>
+
+    <Target Name="NeedGodotForPublish" BeforeTargets="Publish">
+        <Error Text=" Godot path must be set up before publishing; Godot not found at path '$(GodotPath)'. Check Directory.Build.props file." Condition="'$(GodotPath)' == '' or !Exists('$(GodotPath)')" />
+    </Target>
+
+    <Target Name="GodotPublish" AfterTargets="Publish" Condition="'$(GodotPath)' != '' and Exists('$(GodotPath)') and '$(IsInnerGodotExport)' != 'true'">
+        <Message Text="Exporting Godot .pck to mods folder" Importance="high" />
+        <Exec Command="&quot;$(GodotPath)&quot; --headless --export-pack &quot;BasicExport&quot; &quot;$(ModsPath)$(MSBuildProjectName)/$(MSBuildProjectName).pck&quot;" EnvironmentVariables="IsInnerGodotExport=true;MSBUILDDISABLENODEREUSE=1" ContinueOnError="WarnAndContinue" />
+    </Target>
+</Project>
