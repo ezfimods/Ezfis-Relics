@@ -1,6 +1,7 @@
 # Ezfi's Relics
 A STS2 mods that adds 14 new relics to the shared relic pool.
 All relics can be enabled or disabled in the Mod Configuration settings. It won't remove it from the compendium, but it will keep them out of runs.
+Requires BaseLib.
 
 ## Common Relics
 - Bloody Blade: When an enemy goes under half HP, inflict 2 Vulnerable.
